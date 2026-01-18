@@ -82,35 +82,35 @@ Health check endpoint to verify API availability.
 
 
 Project Structure:
-CommentSense/
-├── server/
-│   ├── server.js
-│   └── api.js
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-├── docs/
-├── README.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── package.json
-└── .gitignore
+    CommentSense/
+    ├── server/
+    │   ├── server.js
+    │   └── api.js
+    ├── frontend/
+    │   ├── index.html
+    │   ├── style.css
+    │   └── script.js
+    ├── docs/
+    ├── README.md
+    ├── LICENSE
+    ├── CONTRIBUTING.md
+    ├── package.json
+    └── .gitignore
 
 Technology Stack
-• Backend: Node.js, Express.js
-• Frontend: HTML, CSS, JavaScript
-• Data Format: JSON
-• Architecture: REST API
+ • Backend: Node.js, Express.js
+ • Frontend: HTML, CSS, JavaScript
+ • Data Format: JSON
+ • Architecture: REST API
 
 
 How to Run the Project Locally
 
 Prerequisites:
-• Node.js (LTS recommended)
-• npm (comes with Node.js)
-• A web browser (Chrome recommended)
-  Verify installation:
+ • Node.js (LTS recommended)
+ • npm (comes with Node.js)
+ • A web browser (Chrome recommended)
+Verify installation:
     node -v
     npm -v
 
@@ -124,18 +124,16 @@ Steps to Run
 
 
 • Start the backend server:
-
-node server/server.js
+    node server/server.js
 
 
 • If successful, you will see:
-
-CommentSense API running on http://localhost:3000
+    CommentSense API running on http://localhost:3000
 
 • Keep this terminal running.
 
 • Verify backend (optional):
-http://localhost:3000/v1/health
+    http://localhost:3000/v1/health
 
 
 • Open the frontend demo:
