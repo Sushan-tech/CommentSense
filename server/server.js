@@ -17,6 +17,19 @@ app.get("/v1/health", (req, res) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send(`
+    <h2>CommentSense API</h2>
+    <p>The API is live and running.</p>
+    <ul>
+      <li><b>Health Check:</b> <code>/v1/health</code></li>
+      <li><b>Analyze Comment:</b> <code>POST /v1/analyze</code></li>
+    </ul>
+    <p>Check the GitHub repository for usage details.</p>
+  `);
+});
+
+
 // Core comment analysis endpoint
 app.post("/v1/analyze", async (req, res) => {
   try {
