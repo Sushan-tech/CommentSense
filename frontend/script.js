@@ -12,17 +12,20 @@ analyzeBtn.addEventListener("click", async () => {
   }
 
   try {
-    const response = await fetch("http://localhost:3000/v1/analyze", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        text: text,
-        platform: "demo_ui",
-        content_type: "comment"
-      })
-    });
+    const response = await fetch(
+      "https://commentsense-api.onrender.com/v1/analyze",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text: text,
+          platform: "demo_ui",
+          content_type: "comment"
+        })
+      }
+    );
 
     const data = await response.json();
     resultBox.classList.remove("hidden");
