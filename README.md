@@ -80,10 +80,10 @@ Example request:
 }
 
 GET /v1/health
-Health check endpoint to verify API availability.
+"Health check endpoint to verify API availability."
 
 
-## Project Structure:
+## "Project Structure:"
     CommentSense/
     ├── server/
     │   ├── server.js
@@ -99,24 +99,24 @@ Health check endpoint to verify API availability.
     ├── package.json
     └── .gitignore
 
-## Technology Stack
+## "Technology Stack"
  • Backend: Node.js, Express.js
  • Frontend: HTML, CSS, JavaScript
  • Data Format: JSON
  • Architecture: REST API
 
 
-## How to Run the Project Locally
+## "How to Run the Project Locally"
 
-# Prerequisites:
+# "Prerequisites:"
  • Node.js (LTS recommended)
  • npm (comes with Node.js)
  • A web browser (Chrome recommended)
-# Verify installation:
+# "Verify installation:"
     node -v
     npm -v
 
-## Steps to Run
+## "Steps to Run"
 • Clone the repository:
     git clone https://github.com/<your-username>/CommentSense.git
     cd CommentSense
@@ -138,8 +138,8 @@ Health check endpoint to verify API availability.
 
 
 • Open the frontend demo:
-    Navigate to frontend/
-    Open index.html in a browser
+    "Navigate to frontend/"
+    "Open index.html in a browser"
 • Test with sample comments such as:
    "This creator is stupid and useless"
    "This is an amazing video, great work!"
