@@ -1,14 +1,19 @@
 {
   "name": "commentsense",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API-based comment moderation and chat segregation system",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "open-source",
+    "comment-moderation",
+    "api",
+    "sentiment-analysis"
+  ],
+  "author": "Rajeev",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
