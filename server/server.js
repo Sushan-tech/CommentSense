@@ -1,77 +1,141 @@
+/**
+ * CommentSense API
+ * ----------------
+ * An API-based system for comment analysis and moderation.
+ * Features:
+ * - Sentiment detection
+ * - Toxicity flags
+ * - Moderation recommendation
+ * - Metadata support
+ */
+
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
 
-/* -------------------- MIDDLEWARE -------------------- */
+/* =====================================================
+   MIDDLEWARE
+===================================================== */
 app.use(cors());
 app.use(express.json());
 
-/* -------------------- ROOT ROUTE -------------------- */
-/* This fixes "Cannot GET /" */
+/* =====================================================
+   ROOT ROUTE (API INFO PAGE)
+===================================================== */
 app.get("/", (req, res) => {
   res.status(200).send(`
-    <h2>CommentSense API is running</h2>
-    <p>This is an API-based service.</p>
+    <h2>CommentSense API</h2>
+    <p>The API is live and running.</p>
     <h3>Available Endpoints:</h3>
     <ul>
       <li><b>GET</b> /v1/health</li>
       <li><b>POST</b> /v1/analyze</li>
     </ul>
-    <p>Check the GitHub repository for full documentation.</p>
+    <p>This is an API-first project. Please refer to the GitHub repository for usage details.</p>
   `);
 });
 
-/* -------------------- HEALTH CHECK -------------------- */
+/* =====================================================
+   HEALTH CHECK
+===================================================== */
 app.get("/v1/health", (req, res) => {
   res.json({
     status: "ok",
     service: "CommentSense API",
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().toISOString()
   });
 });
 
-/* -------------------- ANALYZE COMMENT -------------------- */
+/* =====================================================
+   COMMENT ANALYSIS ENDPOINT
+===================================================== */
 app.post("/v1/analyze", (req, res) => {
-  const { text } = req.body;
+  const {
+    text,
+    platform = "unknown",
+    content_type = "comment"
+  } = req.body;
 
+  // Input validation
   if (!text || typeof text !== "string") {
     return res.status(400).json({
-      error: "Invalid input. Please provide a text string.",
+      error: "Invalid input. Please provide a valid text string."
     });
   }
 
   const lowerText = text.toLowerCase();
 
-  let sentiment = "neutral";
+  /* -----------------------------
+     Default Analysis Values
+  ------------------------------ */
+  let sentimentLabel = "neutral";
+  let confidence = 0.6;
   let category = "general";
 
-  // Simple keyword-based logic (can be improved by contributors)
+  const flags = {
+    toxic: false,
+    vulgar: false,
+    spam: false,
+    hate_speech: false
+  };
+
+  /* -----------------------------
+     Simple Keyword-Based Logic
+     (Designed to be extended)
+  ------------------------------ */
   if (
-    lowerText.includes("bad") ||
     lowerText.includes("stupid") ||
-    lowerText.includes("hate")
+    lowerText.includes("idiot") ||
+    lowerText.includes("hate") ||
+    lowerText.includes("fool")
   ) {
-    sentiment = "negative";
-    category = "toxic";
+    sentimentLabel = "negative";
+    confidence = 0.8;
+    category = "toxic_insult";
+    flags.toxic = true;
   } else if (
     lowerText.includes("good") ||
     lowerText.includes("great") ||
     lowerText.includes("awesome") ||
     lowerText.includes("love")
   ) {
-    sentiment = "positive";
+    sentimentLabel = "positive";
+    confidence = 0.85;
     category = "appreciation";
   }
 
+  /* -----------------------------
+     Moderation Recommendation
+  ------------------------------ */
+  const recommended_action =
+    sentimentLabel === "negative" && flags.toxic
+      ? "hide_or_review"
+      : "allow";
+
+  /* -----------------------------
+     Final Structured Response
+  ------------------------------ */
   res.json({
-    originalText: text,
-    sentiment,
-    category,
+    original_text: text,
+    sentiment: {
+      label: sentimentLabel,
+      confidence: confidence
+    },
+    category: category,
+    flags: flags,
+    recommended_action: recommended_action,
+    metadata: {
+      platform: platform,
+      content_type: content_type,
+      language: "en"
+    }
   });
 });
 
-/* -------------------- START SERVER -------------------- */
+/* =====================================================
+   START SERVER
+===================================================== */
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
